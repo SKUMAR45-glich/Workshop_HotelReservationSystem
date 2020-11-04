@@ -40,6 +40,9 @@ namespace HotelReservationSystem
             Console.Write("Enter Weekend Rate for Customer: ");
             hotelDetails.weekenddayrate = Convert.ToInt32(Console.ReadLine());
 
+            Console.Write("Enter Rating for Customer: ");
+            hotelDetails.rating = Convert.ToInt32(Console.ReadLine());
+
             AddHotel(hotelDetails);
         }
 
@@ -124,7 +127,7 @@ namespace HotelReservationSystem
             {
                 foreach (var hotel in this.hotelDetails.Values)
                 {
-                    return $"Hotel Name: {hotel.hotelname}, RegularRate: {hotel.weekdayrate}, WeekendRate: {hotel.weekenddayrate}";
+                    return $"Hotel Name: {hotel.hotelname}, RegularRate: {hotel.weekdayrate}, WeekendRate: {hotel.weekenddayrate} and Rating: {hotel.rating}";
                 }
             }
             catch (CustomExceptions)
