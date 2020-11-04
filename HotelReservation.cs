@@ -37,14 +37,20 @@ namespace HotelReservationSystem
             Console.Write("Enter Name of the Hotel : ");
             hotelDetails.hotelname = Console.ReadLine();
 
-            Console.Write("Enter Weekday Rate for Customer: ");
+            Console.Write("Enter Weekday Rate for Customers: ");
             hotelDetails.weekdayrate = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Enter Weekend Rate for Customer: ");
+            Console.Write("Enter Weekend Rate for Customers: ");
             hotelDetails.weekenddayrate = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Enter Rating for Customer: ");
+            Console.Write("Enter Rating for Customers: ");
             hotelDetails.rating = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter Reward Weekday Rate for Loyal Customers: ");
+            hotelDetails.reward_weekdayrate = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter Reward Weekend Rate for Loyal Customers: ");
+            hotelDetails.reward_weekenddayrate = Convert.ToInt32(Console.ReadLine());
 
             AddHotel(hotelDetails);
         }

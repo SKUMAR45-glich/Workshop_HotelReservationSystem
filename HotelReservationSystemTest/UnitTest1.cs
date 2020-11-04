@@ -16,9 +16,9 @@ namespace HotelReservationSystemTest
         [SetUp]
         public void Setup()
         {
-            hotelReservation.AddHotel(new HotelDetails { hotelname = "Lakewood", weekdayrate = 110, weekenddayrate = 90, rating = 3 });
-            hotelReservation.AddHotel(new HotelDetails{ hotelname = "Bridgewood", weekdayrate = 160, weekenddayrate = 60, rating = 4 });
-            hotelReservation.AddHotel(new HotelDetails { hotelname = "Ridgewood", weekdayrate = 220, weekenddayrate = 150, rating = 5 });
+            hotelReservation.AddHotel(new HotelDetails { hotelname = "Lakewood", weekdayrate = 110, weekenddayrate = 90, rating = 3, reward_weekdayrate = 80, reward_weekenddayrate = 80 });
+            hotelReservation.AddHotel(new HotelDetails{ hotelname = "Bridgewood", weekdayrate = 160, weekenddayrate = 60, rating = 4, reward_weekdayrate = 110, reward_weekenddayrate = 50});
+            hotelReservation.AddHotel(new HotelDetails { hotelname = "Ridgewood", weekdayrate = 220, weekenddayrate = 150, rating = 5, reward_weekdayrate = 100, reward_weekenddayrate = 40});
         }
 
 

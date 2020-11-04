@@ -10,7 +10,7 @@ namespace HotelReservationSystem
 
             HotelReservation hotelReservation = new HotelReservation();
 
-            hotelReservation.GetDetailsfortheHotel();              //Add Name Week and Weekend Rates to the Hotel System
+            hotelReservation.GetDetailsfortheHotel();              //Add Name, Week Rates, Weekend Rates, Rating and Special Rewards to the Hotel System
 
 
             hotelReservation.GettheDateRangeforBooking();           // To get the Best Rated Hotel Available
