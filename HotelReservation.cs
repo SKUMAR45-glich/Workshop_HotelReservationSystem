@@ -84,5 +84,23 @@ namespace HotelReservationSystem
             return totalRate;
         }
 
+        public string DisplayHotels()
+        {
+            Console.WriteLine("Welcome to the Hotels\n");
+            try
+            {
+                foreach (var hotel in this.hotelDetails.Values)
+                {
+                    return $"Hotel Name: {hotel.hotelname}, RegularRate: {hotel.weekdayrate}, WeekendRate: {hotel.weekenddayrate}";
+                }
+            }
+            catch (CustomExceptions)
+            {
+                throw new CustomExceptions(CustomExceptions.ExceptionType.INVALID_NAME, "Please Enter valid Name of Hotel");
+
+            }
+            return "Wrong Name";
+        }
+
     }
 }

@@ -36,5 +36,6 @@ namespace HotelReservationSystemTest
 
             Assert.Equals(result, expected);
         }
+
     }
 }
