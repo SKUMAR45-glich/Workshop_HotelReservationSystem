@@ -8,7 +8,8 @@ namespace HotelReservationSystem
     {
         public Dictionary<string, HotelDetails> hotelDetails;
 
-
+        int cheapestrate = 0;                                             //Cheapest Rate Hotel
+        
         //Constructor
         public HotelReservation()
         {
@@ -25,6 +26,7 @@ namespace HotelReservationSystem
             }
             this.hotelDetails.Add(hotelDetails.hotelname, hotelDetails);
         }
+
 
         //Enter Details from the User
 
@@ -46,6 +48,7 @@ namespace HotelReservationSystem
             AddHotel(hotelDetails);
         }
 
+
         //Get the Range of Date
 
         public void GettheDateRangeforBooking()
@@ -58,15 +61,13 @@ namespace HotelReservationSystem
             var startDate = Convert.ToDateTime(date[0]);
             var endDate = Convert.ToDateTime(date[1]);
 
-            var cheapestHotel = GetCheapestHotel(startDate, endDate);
-            var bill = GetTotalCost(cheapestHotel, startDate, endDate);
-
-            Console.WriteLine($"{cheapestHotel.hotelname}, Total Rates {bill}");
+            var cheapestBestRatedHotel = GetCheapestBestRatedHotel(startDate, endDate);
+            DisplayCheapestBestRatedHotel(cheapestBestRatedHotel);
         }
 
 
         //To find Cheapest Available Hotel 
-        public HotelDetails GetCheapestHotel(DateTime startDate, DateTime endDate)
+        public List<HotelDetails> GetCheapestHotel(DateTime startDate, DateTime endDate)
         {
             if (startDate > endDate)
             {
@@ -74,17 +75,42 @@ namespace HotelReservationSystem
                 return null;
             }
             int bill = Int32.MaxValue;
-            HotelDetails cheapestHotel = new HotelDetails();
+            List<HotelDetails> cheapestHotel = new List<HotelDetails>();
             foreach (var hotels in hotelDetails)
             {
                 int temp = bill;
                 bill = Math.Min(bill, GetTotalCost(hotels.Value, startDate, endDate));
                 if(temp!=bill)
                 {
-                    cheapestHotel = hotels.Value;
+                    cheapestHotel.Add(hotels.Value);
                 }
             }
+
+            cheapestrate = bill;
             return cheapestHotel;
+        }
+
+        //To Find Cheapest Avaliable Best Rated Hotel
+        public List<HotelDetails> GetCheapestBestRatedHotel(DateTime startDate, DateTime endDate)
+        {
+            var cheapestHotel = GetCheapestHotel(startDate, endDate);
+            List<HotelDetails> cheapestBestRatedHotel = new List<HotelDetails>();
+
+            int maxRating = Int32.MinValue;
+
+            foreach(var hotel in cheapestHotel)
+            {
+                maxRating = Math.Max(maxRating, hotel.rating);
+            }
+
+            foreach (var hotel in cheapestHotel)
+            {
+                if(hotel.rating == maxRating)
+                {
+                    cheapestBestRatedHotel.Add(hotel);
+                }
+            }
+            return cheapestBestRatedHotel;
         }
 
 
@@ -117,6 +143,15 @@ namespace HotelReservationSystem
             return numberofDays;
         }
 
+        // Display Cheapest Best Rated Hotel 
+        public void DisplayCheapestBestRatedHotel(List<HotelDetails>cheapestBestRatedHotel)
+        {
+            
+            foreach(HotelDetails hotelDetails in cheapestBestRatedHotel)
+            {
+                Console.WriteLine("Hotel :" + hotelDetails.hotelname + "Total Bill" + cheapestrate);
+            }
+        }
 
 
         //Display Details

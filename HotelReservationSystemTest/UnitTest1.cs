@@ -37,5 +37,21 @@ namespace HotelReservationSystemTest
             Assert.Equals(result, expected);
         }
 
+
+        //Get the Cheapest Best Rated Hotel in the Date Range
+
+        [Test]
+        public void GetCheapestBestRatedHotelinaDateRange()
+        {
+            string start = "11 Sept 2020";
+            DateTime startDate = DateTime.Parse(start);
+            string end = "12 Sept 2020";
+            DateTime endDate = DateTime.Parse(end);
+
+            var expected = hotelReservation.hotelDetails["Bridgewood"];
+            var result = hotelReservation.GetCheapestBestRatedHotel(startDate, endDate);
+
+            Assert.Equals(result, expected);
+        }
     }
 }
