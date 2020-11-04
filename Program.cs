@@ -13,7 +13,7 @@ namespace HotelReservationSystem
             hotelReservation.GetDetailsfortheHotel();              //Add Name, Week Rates, Weekend Rates, Rating and Special Rewards to the Hotel System
 
 
-            hotelReservation.GettheDateRangeforBooking();           // To get the Best Rated Hotel Available
+            hotelReservation.GettheDateRangeforBooking();           // To get the Cheapest Best Rated Hotel Available for Reward Customers
 
             hotelReservation.DisplayHotels();                       //To Display the Details of the Hotel
         }

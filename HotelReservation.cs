@@ -8,7 +8,7 @@ namespace HotelReservationSystem
     {
         public Dictionary<string, HotelDetails> hotelDetails;
 
-        int cheapestrate = 0;                                             //Cheapest Rate Hotel
+        int cheapestrate = 0;                                                                 //Cheapest Rate Hotel
 
         //Constructor
         public HotelReservation()
@@ -158,7 +158,6 @@ namespace HotelReservationSystem
         }
 
 
-
         //Calculate the total bill
         public int GetTotalCost(HotelDetails hotelDetails, DateTime startDate, DateTime endDate)
         {
@@ -167,7 +166,7 @@ namespace HotelReservationSystem
             int weekDays = CheckforWeekDays(startDate, endDate);
             int weekEnds = dateRange - weekDays;
 
-            int totalRate = (weekDays * hotelDetails.weekdayrate) + (weekEnds * hotelDetails.weekenddayrate);
+            int totalRate = (weekDays * hotelDetails.reward_weekdayrate) + (weekEnds * hotelDetails.reward_weekenddayrate);
             return totalRate;
         }
 
