@@ -8,11 +8,14 @@ namespace HotelReservationSystem
     {
         public Dictionary<string, HotelDetails> hotelDetails;
 
+
+        //Constructor
         public HotelReservation()
         {
             hotelDetails = new Dictionary<string, HotelDetails>();
         }
 
+        //To Add Hotel details
         public void AddHotel(HotelDetails hotelDetails)
         {
             if (this.hotelDetails.ContainsKey(hotelDetails.hotelname))
@@ -22,6 +25,8 @@ namespace HotelReservationSystem
             }
             this.hotelDetails.Add(hotelDetails.hotelname, hotelDetails);
         }
+
+        //Enter Details from the User
 
         public void GetDetailsfortheHotel()
         {
@@ -37,6 +42,8 @@ namespace HotelReservationSystem
 
             AddHotel(hotelDetails);
         }
+
+        //Get the Range of Date
 
         public void GettheDateRangeforBooking()
         {
@@ -54,6 +61,8 @@ namespace HotelReservationSystem
             Console.WriteLine($"{cheapestHotel.hotelname}, Total Rates {bill}");
         }
 
+
+        //To find Cheapest Available Hotel 
         public HotelDetails GetCheapestHotel(DateTime startDate, DateTime endDate)
         {
             if (startDate > endDate)
@@ -75,15 +84,39 @@ namespace HotelReservationSystem
             return cheapestHotel;
         }
 
+
+        //Calculate the total bill
         public int GetTotalCost(HotelDetails hotelDetails, DateTime startDate, DateTime endDate)
         {
             TimeSpan timeSpan = endDate.Subtract(startDate);
             int dateRange = Convert.ToInt32(timeSpan.TotalDays);
-            
-            int totalRate = (hotelDetails.weekdayrate * dateRange);
+            int weekDays = CheckforWeekDays(startDate, endDate);
+            int weekEnds = dateRange - weekDays;
+
+            int totalRate = (weekDays * hotelDetails.weekdayrate) + (weekEnds * hotelDetails.weekenddayrate);
             return totalRate;
         }
 
+        //Get the Number of Week days 
+        public int CheckforWeekDays(DateTime startDate, DateTime endDate)
+        {
+            int numberofDays = 0;
+            while (startDate <= endDate)
+            {
+                ////Checking start days is Weekend or not
+                if (startDate.DayOfWeek != DayOfWeek.Saturday && startDate.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    numberofDays++;
+                }
+
+                startDate = startDate.AddDays(1);
+            }
+            return numberofDays;
+        }
+
+
+
+        //Display Details
         public string DisplayHotels()
         {
             Console.WriteLine("Welcome to the Hotels\n");

@@ -14,8 +14,8 @@ namespace HotelReservationSystem
 
 
             hotelReservation.GettheDateRangeforBooking();           // To get the cheapest Hotel Available
-            
 
+            hotelReservation.DisplayHotels();                       //To Display the Details of the Hotel
         }
     }
 }
