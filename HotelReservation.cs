@@ -61,8 +61,10 @@ namespace HotelReservationSystem
             var startDate = Convert.ToDateTime(date[0]);
             var endDate = Convert.ToDateTime(date[1]);
 
-            var cheapestBestRatedHotel = GetCheapestBestRatedHotel(startDate, endDate);
-            DisplayCheapestBestRatedHotel(cheapestBestRatedHotel);
+            var cheapestBestRatedHotel = GetBestRatedHotel(startDate, endDate);
+            cheapestrate = GetTotalCost(cheapestBestRatedHotel, startDate, endDate);
+    
+            DisplayBestRatedHotel(cheapestBestRatedHotel);
         }
 
 
@@ -113,7 +115,38 @@ namespace HotelReservationSystem
             return cheapestBestRatedHotel;
         }
 
+        public HotelDetails GetBestRatedHotel(DateTime startDate, DateTime endDate)
+        {
+            if (startDate > endDate)
+            {
+                Console.WriteLine("Please enter a valid range of dates");
+                return null;
+            }
 
+            HotelDetails bestRatedHotel = new HotelDetails();
+            int maxRating = Int32.MinValue;
+
+            foreach (var hotel in hotelDetails)
+            {
+                maxRating = Math.Max(maxRating, hotel.Value.rating);
+            }
+
+            foreach (var hotel in hotelDetails)
+            {
+                if (hotel.Value.rating == maxRating)
+                {
+                    bestRatedHotel = hotel.Value;
+                }
+            }
+            return bestRatedHotel;
+        }
+
+
+        public void DisplayBestRatedHotel(HotelDetails bestRatedHotel)
+        {
+            
+            Console.WriteLine("Hotel :" + bestRatedHotel.hotelname + "Total Bill" + cheapestrate);
+        }
         //Calculate the total bill
         public int GetTotalCost(HotelDetails hotelDetails, DateTime startDate, DateTime endDate)
         {
