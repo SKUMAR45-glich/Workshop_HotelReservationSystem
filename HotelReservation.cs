@@ -9,12 +9,13 @@ namespace HotelReservationSystem
         public Dictionary<string, HotelDetails> hotelDetails;
 
         int cheapestrate = 0;                                             //Cheapest Rate Hotel
-        
+
         //Constructor
         public HotelReservation()
         {
             hotelDetails = new Dictionary<string, HotelDetails>();
         }
+
 
         //To Add Hotel details
         public void AddHotel(HotelDetails hotelDetails)
@@ -63,7 +64,7 @@ namespace HotelReservationSystem
 
             var cheapestBestRatedHotel = GetBestRatedHotel(startDate, endDate);
             cheapestrate = GetTotalCost(cheapestBestRatedHotel, startDate, endDate);
-    
+
             DisplayBestRatedHotel(cheapestBestRatedHotel);
         }
 
@@ -82,7 +83,7 @@ namespace HotelReservationSystem
             {
                 int temp = bill;
                 bill = Math.Min(bill, GetTotalCost(hotels.Value, startDate, endDate));
-                if(temp!=bill)
+                if (temp != bill)
                 {
                     cheapestHotel.Add(hotels.Value);
                 }
@@ -100,14 +101,14 @@ namespace HotelReservationSystem
 
             int maxRating = Int32.MinValue;
 
-            foreach(var hotel in cheapestHotel)
+            foreach (var hotel in cheapestHotel)
             {
                 maxRating = Math.Max(maxRating, hotel.rating);
             }
 
             foreach (var hotel in cheapestHotel)
             {
-                if(hotel.rating == maxRating)
+                if (hotel.rating == maxRating)
                 {
                     cheapestBestRatedHotel.Add(hotel);
                 }
@@ -115,6 +116,8 @@ namespace HotelReservationSystem
             return cheapestBestRatedHotel;
         }
 
+
+        //To Find Best Rated Hotel Available
         public HotelDetails GetBestRatedHotel(DateTime startDate, DateTime endDate)
         {
             if (startDate > endDate)
@@ -142,11 +145,14 @@ namespace HotelReservationSystem
         }
 
 
+        //Display Best Rated Hotel
         public void DisplayBestRatedHotel(HotelDetails bestRatedHotel)
         {
-            
             Console.WriteLine("Hotel :" + bestRatedHotel.hotelname + "Total Bill" + cheapestrate);
         }
+
+
+
         //Calculate the total bill
         public int GetTotalCost(HotelDetails hotelDetails, DateTime startDate, DateTime endDate)
         {
@@ -176,11 +182,12 @@ namespace HotelReservationSystem
             return numberofDays;
         }
 
+
         // Display Cheapest Best Rated Hotel 
-        public void DisplayCheapestBestRatedHotel(List<HotelDetails>cheapestBestRatedHotel)
+        public void DisplayCheapestBestRatedHotel(List<HotelDetails> cheapestBestRatedHotel)
         {
-            
-            foreach(HotelDetails hotelDetails in cheapestBestRatedHotel)
+
+            foreach (HotelDetails hotelDetails in cheapestBestRatedHotel)
             {
                 Console.WriteLine("Hotel :" + hotelDetails.hotelname + "Total Bill" + cheapestrate);
             }
