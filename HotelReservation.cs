@@ -20,12 +20,11 @@ namespace HotelReservationSystem
         //To Add Hotel details
         public void AddHotel(HotelDetails hotelDetails)
         {
-            if (this.hotelDetails.ContainsKey(hotelDetails.hotelname))
+            if (isValid(hotelDetails))
             {
-                Console.WriteLine("This Hotel is Already Present in Miami");
-                return;
+                this.hotelDetails.Add(hotelDetails.hotelname, hotelDetails);
             }
-            this.hotelDetails.Add(hotelDetails.hotelname, hotelDetails);
+            
         }
 
 
@@ -51,6 +50,7 @@ namespace HotelReservationSystem
 
             Console.Write("Enter Reward Weekend Rate for Loyal Customers: ");
             hotelDetails.reward_weekenddayrate = Convert.ToInt32(Console.ReadLine());
+
 
             AddHotel(hotelDetails);
         }
@@ -80,9 +80,9 @@ namespace HotelReservationSystem
         {
             if (startDate > endDate)
             {
-                Console.WriteLine("Please enter a valid range of dates");
-                return null;
+                throw new CustomExceptions(CustomExceptions.ExceptionType.INVALID_RANGE_OF_DATE, "Please Enter a valid Range of Date");
             }
+
             int bill = Int32.MaxValue;
             List<HotelDetails> cheapestHotel = new List<HotelDetails>();
             foreach (var hotels in hotelDetails)
@@ -218,5 +218,31 @@ namespace HotelReservationSystem
             return "Wrong Name";
         }
 
+
+        //Check Validity of Hotel Entered
+        public bool isValid(HotelDetails hotelDetails)
+        {
+            if (hotelDetails.hotelname == null)
+            {
+                throw new CustomExceptions(CustomExceptions.ExceptionType.NO_VALUE_ENTRIES, "Please enter some value, NULL values not allowed");
+            }
+
+            else if (hotelDetails.rating > 5 || hotelDetails.rating < 3)
+            {
+                throw new CustomExceptions(CustomExceptions.ExceptionType.INVALID_RATING, "Raing must be greater than 2 and less than or equal to 5 ");
+            }
+            else if (hotelDetails.weekdayrate == 0 || hotelDetails.weekenddayrate == 0 || hotelDetails.reward_weekdayrate == 0 || hotelDetails.reward_weekenddayrate == 0)
+            {
+                throw new CustomExceptions(CustomExceptions.ExceptionType.INVALID_RATE, "Please enter a valid Rate for customers (No free service allowed)");
+            }
+            else if (this.hotelDetails.ContainsKey(hotelDetails.hotelname))
+            {
+                throw new CustomExceptions(CustomExceptions.ExceptionType.INVALID_NAME, "Hotel Name Already Exists");
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

@@ -9,6 +9,10 @@ namespace HotelReservationSystem
         public enum ExceptionType
         {
             INVALID_NAME,
+            NO_VALUE_ENTRIES,
+            INVALID_RATING,
+            INVALID_RATE,
+            INVALID_RANGE_OF_DATE,
         }
 
         ExceptionType type;
