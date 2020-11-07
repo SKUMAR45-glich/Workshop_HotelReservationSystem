@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HotelReservationSystem
 {
+
+    
     public class HotelReservation
     {
         public Dictionary<string, HotelDetails> hotelDetails;
 
         int cheapestrate = 0;                                                                 //Cheapest Rate Hotel
+        string customerType = "";
 
         //Constructor
         public HotelReservation()
@@ -52,7 +56,19 @@ namespace HotelReservationSystem
             hotelDetails.reward_weekenddayrate = Convert.ToInt32(Console.ReadLine());
 
 
-            AddHotel(hotelDetails);
+            Console.Write("Enter the Customer Type: ");
+            customerType = Console.ReadLine();
+
+            if(ValidCustomerType(customerType))
+            {
+                AddHotel(hotelDetails);
+            }
+            
+            else
+            {
+                throw new CustomExceptions(CustomExceptions.ExceptionType.INVALID_CUST_TYPE, "Please Enter Valid Customer Type");
+            }
+
         }
 
 
@@ -165,8 +181,15 @@ namespace HotelReservationSystem
             int dateRange = Convert.ToInt32(timeSpan.TotalDays);
             int weekDays = CheckforWeekDays(startDate, endDate);
             int weekEnds = dateRange - weekDays;
-
-            int totalRate = (weekDays * hotelDetails.reward_weekdayrate) + (weekEnds * hotelDetails.reward_weekenddayrate);
+            int totalRate;
+            if(customerType == "Regular")
+            {
+                totalRate = (weekDays * hotelDetails.weekdayrate) + (weekEnds * hotelDetails.weekenddayrate);
+            }
+            else
+            {
+                totalRate = (weekDays * hotelDetails.reward_weekdayrate) + (weekEnds * hotelDetails.reward_weekenddayrate);
+            }
             return totalRate;
         }
 
@@ -244,5 +267,27 @@ namespace HotelReservationSystem
                 return true;
             }
         }
+
+        //Check the validity of CustomerType
+
+        public static bool ValidCustomerType(string custType)
+        {
+            string Cust_Type = "^(Reward|Regular)$";
+
+            if(Regex.IsMatch(custType,Cust_Type))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public enum CustomerType
+        {
+            Regular, Reward
+        };
+
     }
 }

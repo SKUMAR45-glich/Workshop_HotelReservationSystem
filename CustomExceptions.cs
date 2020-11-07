@@ -13,6 +13,7 @@ namespace HotelReservationSystem
             INVALID_RATING,
             INVALID_RATE,
             INVALID_RANGE_OF_DATE,
+            INVALID_CUST_TYPE,
         }
 
         ExceptionType type;

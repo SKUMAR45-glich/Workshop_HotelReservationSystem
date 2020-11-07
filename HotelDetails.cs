@@ -13,7 +13,9 @@ namespace HotelReservationSystem
         public int reward_weekdayrate { get; set; }
         public int reward_weekenddayrate { get; set; }
 
-        
+
     }
+
+    
 
 }
